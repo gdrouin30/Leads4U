@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Leads4U — Your AI-Powered Lead Finder</title>
+<meta name="description" content="Leads4U builds an AI-powered lead-generation system that continuously finds qualified prospects in your niche. $300 one-time setup, ~$80/month to operate." />
+<meta name="theme-color" content="#f7f2e8" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Leads4U" />
+<meta property="og:title" content="Leads4U — Your AI-Powered Lead Finder" />
+<meta property="og:description" content="Tell us who you want as customers. We build the AI system that finds them for you." />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f7f2e8'/%3E%3Cpath d='M18 46V18h7v21.5h17V46H18z' fill='%232c4638'/%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#f7f2e8; --paper-2:#efe7d5; --paper-3:#e6dcc4;
+    --ink:#211d17; --ink-muted:#61574a; --ink-faint:#8c8271;
+    --forest:#2c4638; --forest-bright:#3d6249; --forest-deep:#182720;
+    --forest-soft:rgba(44,70,56,0.08);
+    --line:rgba(33,29,23,0.13); --line-soft:rgba(33,29,23,0.08);
+    --r:8px; --max:1240px; --ease:cubic-bezier(.22,1,.36,1);
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; background:var(--paper); }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *,*::before,*::after{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+  }
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:'Work Sans', ui-sans-serif, system-ui, sans-serif;
+    font-weight:400; line-height:1.6; font-size:17px;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  img,svg,video{ display:block; max-width:100%; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ list-style:none; margin:0; padding:0; }
+  h1,h2,h3,h4{ font-family:'Newsreader',serif; font-optical-sizing:auto; font-weight:500; margin:0; color:var(--ink); text-wrap:balance; }
+  p{ margin:0; }
+  button{ font-family:inherit; }
+  :focus-visible{ outline:2px solid var(--forest); outline-offset:3px; border-radius:3px; }
+
+  .container{ max-width:var(--max); margin:0 auto; padding:0 32px; }
+  @media (max-width:640px){ .container{ padding:0 22px; } }
+
+  .t-display{ font-size:clamp(38px,5.2vw,64px); line-height:1.1; font-weight:500; }
+  .t-heading-lg{ font-size:clamp(32px,4.4vw,50px); line-height:1.15; font-weight:500; }
+  .t-heading{ font-size:clamp(26px,3vw,38px); line-height:1.2; font-weight:500; }
+  .t-body{ font-size:17px; color:var(--ink-muted); line-height:1.7; }
+  em{ font-style:italic; color:var(--forest); }
+
+  .eyebrow{ display:flex; align-items:center; gap:10px; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--forest); font-weight:600; margin-bottom:20px; }
+  .eyebrow::before{ content:''; width:24px; height:1px; background:var(--forest); flex:none; }
+
+  .section{ padding:104px 0; position:relative; }
+  @media (max-width:760px){ .section{ padding:64px 0; } }
+  .section-head{ max-width:640px; margin:0 0 64px; }
+  .section-head p{ margin-top:16px; }
+
+  hr.hairline{ border:none; height:1px; background:var(--line); margin:0; }
+
+  .reveal{ opacity:0; transform:translateY(26px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  .d1{ transition-delay:.1s; } .d2{ transition-delay:.2s; } .d3{ transition-delay:.3s; }
+
+  /* ---- Buttons / links ---- */
+  .btn{ display:inline-flex; align-items:center; gap:10px; padding:16px 30px; border-radius:100px; background:var(--forest); color:var(--paper); font-size:14px; font-weight:600; transition:background .3s, transform .3s, box-shadow .3s; border:none; cursor:pointer; white-space:nowrap; }
+  .btn:hover{ background:var(--forest-bright); transform:translateY(-2px); box-shadow:0 14px 30px -14px rgba(44,70,56,0.55); }
+  .btn:active{ transform:translateY(0); }
+  .ghost-link{ display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:600; color:var(--ink); border-bottom:1px solid var(--ink-faint); padding-bottom:4px; transition:color .3s, border-color .3s; }
+  .ghost-link:hover{ color:var(--forest); border-color:var(--forest); }
+  .ghost-link svg{ width:14px; height:14px; transition:transform .3s var(--ease); }
+  .ghost-link:hover svg{ transform:translateX(4px); }
+  .cta-row{ display:flex; align-items:center; gap:28px; flex-wrap:wrap; }
+
+  /* ---- Photo frame ---- */
+  .frame{ position:relative; border-radius:var(--r); overflow:hidden; box-shadow:0 30px 60px -30px rgba(33,29,23,0.28); }
+  .frame img, .frame video{ width:100%; height:100%; object-fit:cover; }
+  .frame::after{ content:''; position:absolute; inset:0; box-shadow:inset 0 0 0 1px rgba(33,29,23,0.08); border-radius:var(--r); pointer-events:none; }
+
+  /* ---- Nav ---- */
+  header{ position:fixed; top:0; left:0; right:0; z-index:100; padding:26px 0; transition:padding .4s var(--ease), background .4s var(--ease), border-color .4s var(--ease); border-bottom:1px solid transparent; }
+  header.scrolled{ padding:16px 0; background:rgba(247,242,232,0.9); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--line); }
+  .nav{ display:flex; align-items:center; justify-content:space-between; gap:24px; }
+  .logo{ font-family:'Newsreader',serif; font-style:italic; font-weight:500; font-size:22px; color:var(--ink); }
+  .logo .four{ color:var(--forest); font-style:normal; }
+  .nav-links{ display:flex; align-items:center; gap:38px; }
+  .nav-links a{ font-size:13.5px; font-weight:500; color:var(--ink-muted); position:relative; }
+  .nav-links a::after{ content:''; position:absolute; left:0; right:0; bottom:-5px; height:1px; background:var(--forest); transform:scaleX(0); transform-origin:left; transition:transform .3s var(--ease); }
+  .nav-links a:hover{ color:var(--ink); } .nav-links a:hover::after{ transform:scaleX(1); }
+  .nav-cta{ display:flex; align-items:center; gap:14px; }
+  .nav-cta .btn{ padding:12px 22px; }
+  .nav-toggle{ display:none; width:38px; height:38px; border-radius:50%; border:1px solid var(--line); background:transparent; align-items:center; justify-content:center; cursor:pointer; }
+  .nav-toggle svg{ width:16px; height:16px; color:var(--ink); }
+  @media (max-width:900px){ .nav-links{ display:none; } .nav-cta .btn{ display:none; } .nav-toggle{ display:flex; } }
+
+  .mobile-menu{ position:fixed; inset:0; z-index:99; background:var(--paper); padding:104px 26px 40px; overflow-y:auto; transform:translateY(-100%); opacity:0; transition:transform .45s var(--ease), opacity .3s; display:flex; flex-direction:column; gap:2px; }
+  .mobile-menu.open{ transform:translateY(0); opacity:1; }
+  .mobile-menu a{ padding:18px 2px; font-size:24px; font-family:'Newsreader',serif; color:var(--ink); border-bottom:1px solid var(--line); }
+  .mobile-menu .btn{ margin-top:26px; align-self:flex-start; }
+
+  /* ---- Hero ---- */
+  .hero{ padding:150px 0 40px; }
+  @media (max-width:760px){ .hero{ padding:120px 0 20px; } }
+  .hero-grid{ display:grid; grid-template-columns:1fr 0.92fr; gap:64px; align-items:center; }
+  @media (max-width:960px){ .hero-grid{ grid-template-columns:1fr; gap:40px; } }
+  .hero h1{ max-width:12ch; margin-bottom:24px; }
+  .hero-sub{ max-width:44ch; margin-bottom:36px; font-size:18px; }
+  .hero-fine{ margin-top:34px; font-size:13.5px; color:var(--ink-faint); }
+  .hero-frame{ aspect-ratio:5/6; }
+  .hero-frame img{ filter:saturate(1.05) contrast(1.02) brightness(1.02); width:100%; height:100%; object-fit:cover; }
+  .hero-badge{ position:absolute; left:22px; bottom:22px; z-index:2; background:rgba(247,242,232,0.94); backdrop-filter:blur(6px); padding:14px 18px; border-radius:6px; display:flex; align-items:center; gap:12px; box-shadow:0 14px 30px -16px rgba(33,29,23,0.4); }
+  .hero-badge .dot{ width:7px; height:7px; border-radius:50%; background:var(--forest); box-shadow:0 0 0 4px var(--forest-soft); flex:none; }
+  .hero-badge .txt{ font-size:12px; }
+  .hero-badge .txt b{ display:block; font-family:'Newsreader',serif; font-size:16px; font-weight:500; }
+  .hero-badge .txt span{ color:var(--ink-faint); }
+
+  /* ---- Trust split ---- */
+  .split{ display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+  @media (max-width:900px){ .split{ grid-template-columns:1fr; gap:40px; } }
+  .split.rev .frame{ order:2; }
+  @media (max-width:900px){ .split.rev .frame{ order:0; } }
+  .split .frame{ aspect-ratio:4/5; }
+  .copy h2{ margin-bottom:22px; max-width:13ch; }
+  .copy p{ margin-bottom:36px; max-width:46ch; }
+  .pill-row{ display:flex; flex-wrap:wrap; gap:10px 26px; }
+  .pill-row span{ font-size:13px; color:var(--ink-faint); display:flex; align-items:center; gap:8px; }
+  .pill-row span::before{ content:''; width:4px; height:4px; border-radius:50%; background:var(--forest); flex:none; }
+  .stat-row{ display:flex; gap:20px; flex-wrap:wrap; }
+  .stat-card{ background:var(--paper-2); border:1px solid var(--line-soft); border-radius:6px; padding:18px 22px; flex:1; min-width:140px; }
+  .stat-card .n{ font-family:'Newsreader',serif; font-size:28px; font-weight:500; color:var(--forest-deep); font-variant-numeric:tabular-nums; }
+  .stat-card .l{ font-size:12px; color:var(--ink-faint); margin-top:6px; }
+
+  /* ---- Steps ---- */
+  .steps-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:56px 36px; }
+  @media (max-width:860px){ .steps-grid{ grid-template-columns:1fr; gap:44px; } }
+  .step{ padding-top:30px; border-top:1px solid var(--line); }
+  .step-num{ font-family:'Newsreader',serif; font-style:italic; font-size:15px; color:var(--forest); display:block; margin-bottom:20px; }
+  .step h3{ font-size:23px; margin-bottom:12px; }
+  .step p{ color:var(--ink-muted); font-size:15.5px; max-width:34ch; }
+
+  /* ---- Features ---- */
+  .feature-grid{ display:grid; grid-template-columns:repeat(2,1fr); border-top:1px solid var(--line); }
+  @media (max-width:780px){ .feature-grid{ grid-template-columns:1fr; } }
+  .feature-item{ padding:32px 32px 32px 0; border-bottom:1px solid var(--line); }
+  .feature-grid .feature-item:nth-child(odd){ border-right:1px solid var(--line); padding-right:32px; }
+  @media (max-width:780px){ .feature-grid .feature-item:nth-child(odd){ border-right:none; } }
+  .feature-item .idx{ font-size:12px; color:var(--ink-faint); letter-spacing:0.08em; }
+  .feature-item h3{ font-size:20px; margin:10px 0 8px; }
+  .feature-item p{ color:var(--ink-muted); font-size:15px; max-width:42ch; }
+
+  /* ---- Pricing ---- */
+  .pricing-grid{ display:grid; grid-template-columns:1.05fr 0.95fr; gap:70px; align-items:start; }
+  @media (max-width:980px){ .pricing-grid{ grid-template-columns:1fr; gap:50px; } }
+  .price-line{ display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:6px; }
+  .price-line .amt{ font-family:'Newsreader',serif; font-size:clamp(42px,6vw,68px); font-weight:500; }
+  .price-line .per{ color:var(--ink-faint); font-size:13.5px; text-transform:uppercase; letter-spacing:0.06em; }
+  .price-desc{ color:var(--ink-muted); font-size:15px; margin-bottom:30px; }
+  .price-list{ display:flex; flex-direction:column; margin-top:14px; }
+  .price-list li{ display:flex; gap:14px; align-items:flex-start; font-size:15px; color:var(--ink-muted); padding:15px 0; border-top:1px solid var(--line); }
+  .price-list li:last-child{ border-bottom:1px solid var(--line); }
+  .price-list li svg{ width:15px; height:15px; flex:none; color:var(--forest); margin-top:4px; }
+  .price-note{ font-size:12.5px; color:var(--ink-faint); }
+  .compare-card{ background:var(--paper-2); border:1px solid var(--line-soft); border-radius:var(--r); padding:8px; }
+  .compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:0; }
+  .compare-col{ padding:26px 22px; }
+  .compare-col.us{ background:var(--paper); border-radius:6px; box-shadow:0 20px 40px -24px rgba(33,29,23,0.25); }
+  .compare-col h4{ font-size:11.5px; text-transform:uppercase; letter-spacing:0.1em; color:var(--ink-faint); margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid var(--line); font-weight:600; font-family:'Work Sans',sans-serif; }
+  .compare-col.us h4{ color:var(--forest); }
+  .compare-col ul{ display:flex; flex-direction:column; gap:16px; }
+  .compare-col li{ font-size:14px; color:var(--ink-faint); line-height:1.5; }
+  .compare-col.us li{ color:var(--ink); }
+  @media (max-width:540px){ .compare-grid{ grid-template-columns:1fr; } }
+
+  /* ---- Guarantee ---- */
+  .guarantee{ display:grid; grid-template-columns:auto 1fr; gap:48px; align-items:center; background:var(--paper-2); border:1px solid var(--line-soft); border-radius:var(--r); padding:56px; }
+  @media (max-width:760px){ .guarantee{ grid-template-columns:1fr; padding:36px 26px; text-align:left; } }
+  .badge-seal{ width:90px; height:90px; border-radius:50%; border:1.5px solid var(--forest); display:flex; align-items:center; justify-content:center; flex:none; }
+  .badge-seal svg{ width:38px; height:38px; color:var(--forest); }
+  .guarantee h3{ margin-bottom:14px; }
+  .guarantee p{ color:var(--ink-muted); font-size:16px; max-width:640px; }
+  .guarantee .fine{ margin-top:14px; font-size:13px; color:var(--ink-faint); }
+
+  /* ---- Video banner ---- */
+  .video-banner{ position:relative; border-radius:var(--r); overflow:hidden; height:440px; }
+  @media (max-width:760px){ .video-banner{ height:320px; } }
+  .video-banner img{ width:100%; height:130%; object-fit:cover; will-change:transform; }
+  .video-banner::after{ content:''; position:absolute; inset:0; background:linear-gradient(0deg, rgba(24,39,32,0.82) 0%, rgba(24,39,32,0.1) 55%); }
+  .video-banner-copy{ position:absolute; left:40px; bottom:32px; right:40px; z-index:1; color:var(--paper); }
+  .video-banner-copy .eyebrow{ color:var(--paper); opacity:0.75; }
+  .video-banner-copy .eyebrow::before{ background:var(--paper); opacity:0.6; }
+  .video-banner-copy h2{ color:var(--paper); font-size:clamp(24px,3.2vw,36px); max-width:16ch; }
+  @media (max-width:600px){ .video-banner-copy{ left:24px; right:24px; bottom:22px; } }
+
+  /* ---- Who it's for: industry grid ---- */
+  .industry-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
+  @media (max-width:960px){ .industry-grid{ grid-template-columns:repeat(3,1fr); } }
+  @media (max-width:660px){ .industry-grid{ grid-template-columns:repeat(2,1fr); } }
+  .industry-tile{ position:relative; border-radius:6px; overflow:hidden; aspect-ratio:4/5; box-shadow:0 16px 30px -20px rgba(33,29,23,0.3); transition:transform .4s var(--ease); }
+  .industry-tile:hover{ transform:translateY(-5px); }
+  .industry-tile img{ width:100%; height:100%; object-fit:cover; filter:saturate(0.94); transition:transform .6s var(--ease); }
+  .industry-tile:hover img{ transform:scale(1.06); }
+  .industry-tile::after{ content:''; position:absolute; inset:0; background:linear-gradient(0deg, rgba(24,39,32,0.78) 0%, rgba(24,39,32,0) 60%); }
+  .industry-tile span{ position:absolute; left:16px; bottom:14px; z-index:1; color:var(--paper); font-family:'Newsreader',serif; font-size:17px; font-style:italic; }
+  .who-footer{ margin-top:52px; color:var(--ink-muted); font-size:15.5px; max-width:60ch; }
+  .who-footer strong{ color:var(--ink); font-weight:600; }
+
+  /* ---- Lead demo ---- */
+  .demo-head{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:28px; flex-wrap:wrap; }
+  .demo-head h4{ font-size:12.5px; text-transform:uppercase; letter-spacing:0.1em; color:var(--ink-faint); font-family:'Work Sans',sans-serif; font-weight:600; }
+  .filters{ display:flex; gap:10px; flex-wrap:wrap; }
+  .filter-btn{ font-size:11.5px; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; padding:9px 17px; border-radius:100px; background:transparent; border:1px solid var(--line); color:var(--ink-faint); cursor:pointer; transition:all .25s; }
+  .filter-btn:hover{ border-color:var(--ink-faint); color:var(--ink); }
+  .filter-btn.active{ background:var(--forest); color:var(--paper); border-color:transparent; }
+  .table-scroll{ overflow-x:auto; border-top:1px solid var(--line); }
+  table.leads{ width:100%; border-collapse:collapse; min-width:820px; }
+  table.leads th{ text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:0.07em; color:var(--ink-faint); font-weight:600; padding:16px 18px 16px 0; white-space:nowrap; }
+  table.leads td{ padding:16px 18px 16px 0; border-top:1px solid var(--line); font-size:14px; color:var(--ink-muted); vertical-align:middle; }
+  .co-cell{ display:flex; align-items:center; gap:11px; }
+  .co-cell .dot{ width:6px; height:6px; border-radius:50%; flex:none; }
+  .co-name{ font-weight:600; color:var(--ink); }
+  .score-bar{ display:flex; align-items:center; gap:9px; }
+  .score-track{ width:58px; height:3px; border-radius:2px; background:var(--line); }
+  .score-fill{ height:100%; border-radius:2px; background:var(--forest); }
+  .qual-badge{ font-size:10px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; padding:5px 11px; border-radius:100px; white-space:nowrap; }
+  .qual-badge.high{ background:var(--forest-soft); color:var(--forest-deep); }
+  .qual-badge.med{ background:var(--paper-3); color:var(--ink-muted); }
+  .qual-badge.low{ background:var(--paper-2); color:var(--ink-faint); }
+  .site-link{ color:var(--forest); font-size:13px; }
+  .site-link:hover{ text-decoration:underline; }
+  .demo-foot{ padding-top:16px; font-size:12px; color:var(--ink-faint); }
+
+  /* ---- FAQ ---- */
+  .faq-list{ max-width:800px; border-top:1px solid var(--line); }
+  .faq-item{ border-bottom:1px solid var(--line); }
+  .faq-q{ width:100%; text-align:left; background:none; border:none; color:var(--ink); cursor:pointer; padding:24px 0; display:flex; align-items:center; justify-content:space-between; gap:22px; font-family:'Newsreader',serif; font-size:18px; }
+  .faq-q .plus{ flex:none; width:20px; height:20px; position:relative; }
+  .faq-q .plus::before, .faq-q .plus::after{ content:''; position:absolute; background:var(--ink-faint); transition:transform .35s var(--ease), background .3s; }
+  .faq-q .plus::before{ left:0; top:50%; width:100%; height:1px; transform:translateY(-50%); }
+  .faq-q .plus::after{ top:0; left:50%; width:1px; height:100%; transform:translateX(-50%); }
+  .faq-item.open .faq-q .plus::after{ transform:translateX(-50%) rotate(90deg); opacity:0; }
+  .faq-item.open .faq-q .plus::before{ background:var(--forest); }
+  .faq-a{ max-height:0; overflow:hidden; transition:max-height .45s var(--ease); }
+  .faq-a-inner{ padding:0 0 26px; color:var(--ink-muted); font-size:15px; line-height:1.7; max-width:68ch; }
+
+  /* ---- Final CTA ---- */
+  .final-cta{ position:relative; border-radius:var(--r); overflow:hidden; padding:110px 60px; text-align:center; }
+  .final-cta .photo-bg{ position:absolute; inset:0; z-index:0; }
+  .final-cta .photo-bg img{ width:100%; height:100%; object-fit:cover; }
+  .final-cta .photo-bg::after{ content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(24,39,32,0.55), rgba(24,39,32,0.82)); }
+  .final-cta > *{ position:relative; z-index:1; }
+  .final-cta h2{ color:var(--paper); margin-bottom:22px; }
+  .final-cta h2 em{ color:#c9dac9; }
+  .final-cta p{ color:rgba(247,242,232,0.82); font-size:17px; max-width:480px; margin:0 auto 44px; }
+  .final-cta .cta-row{ justify-content:center; }
+  .final-cta .btn{ background:var(--paper); color:var(--forest-deep); }
+  .final-cta .btn:hover{ background:#fff; }
+  .final-cta .price-note{ margin-top:22px; color:rgba(247,242,232,0.65); }
+  @media (max-width:640px){ .final-cta{ padding:80px 26px; } }
+
+  /* ---- Footer ---- */
+  footer{ padding:76px 0 50px; border-top:1px solid var(--line); }
+  .footer-grid{ display:flex; justify-content:space-between; align-items:flex-start; gap:50px; flex-wrap:wrap; }
+  .footer-brand p{ color:var(--ink-faint); font-size:14px; margin-top:16px; max-width:280px; }
+  .footer-cols{ display:flex; gap:80px; flex-wrap:wrap; }
+  .footer-col h5{ font-size:11px; text-transform:uppercase; letter-spacing:0.09em; color:var(--ink-faint); margin-bottom:16px; font-weight:600; }
+  .footer-col ul{ display:flex; flex-direction:column; gap:11px; }
+  .footer-col a{ font-size:14px; color:var(--ink-muted); }
+  .footer-col a:hover{ color:var(--ink); }
+  .footer-bottom{ margin-top:50px; padding-top:22px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+  .footer-bottom p{ font-size:12.5px; color:var(--ink-faint); }
+  .footer-disclaimer{ font-size:12px; color:var(--ink-faint); max-width:960px; margin-top:20px; line-height:1.7; }
+
+  ::selection{ background:rgba(44,70,56,0.18); }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="container nav">
+    <a href="#top" class="logo">Leads<span class="four">4U</span></a>
+    <nav class="nav-links">
+      <a href="#how-it-works">How It Works</a>
+      <a href="#features">Features</a>
+      <a href="#who-its-for">Who It's For</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#pricing" class="btn">Get Started</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#how-it-works">How It Works</a>
+  <a href="#features">Features</a>
+  <a href="#who-its-for">Who It's For</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#faq">FAQ</a>
+  <a href="#pricing" class="btn">Get Started — $300</a>
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow reveal in">A Quieter Way to Get New Work</div>
+        <h1 class="t-display reveal in d1">Fewer cold calls. <em>More warm ones.</em></h1>
+        <p class="hero-sub t-body reveal in d2">We build a quiet AI system that spends every day looking for the customers you actually want — so your calendar fills with people who already fit.</p>
+        <div class="cta-row reveal in d3">
+          <a href="#pricing" class="btn">Get Your AI Lead System</a>
+          <a href="#how-it-works" class="ghost-link">See How It Works
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+        <div class="hero-fine reveal in d3">$300 one-time setup · ~$80/month to operate</div>
+      </div>
+
+      <div class="frame hero-frame reveal in d2" style="position:relative;">
+        <img src="assets/img/hero.jpg" alt="A professional working on a laptop with coffee" />
+        <div class="hero-badge">
+          <span class="dot"></span>
+          <span class="txt"><b id="heroBadgeNum">127</b><span>prospects found this week*</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="section" id="trust">
+    <div class="container split">
+      <div class="frame reveal"><img src="assets/img/interior.jpg" alt="Bright, sunlit living room — a home a client's business might serve" /></div>
+      <div class="copy">
+        <div class="eyebrow reveal d1">Built Around You</div>
+        <h2 class="t-heading reveal d1">Configured for how <em>you</em> already sell.</h2>
+        <p class="reveal d2">We don't run one generic system for everyone. Tell us your niche, your service area, and what a good customer looks like — we build the system around that, not the other way around.</p>
+        <div class="stat-row reveal d3">
+          <div class="stat-card"><div class="n">3</div><div class="l">Months bug-fix coverage</div></div>
+          <div class="stat-card"><div class="n">0</div><div class="l">Long-term contracts</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow reveal">How It Works</div>
+        <h2 class="t-heading-lg reveal d1">From setup to steady leads in three steps.</h2>
+        <p class="t-body reveal d2">No technical work on your end. You tell us what you need — we build and run the system.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step reveal"><span class="step-num">01</span><h3>Tell Us Who You Want</h3><p>You provide your niche, location, ideal customer, and lead criteria — no technical detail required.</p></div>
+        <div class="step reveal d1"><span class="step-num">02</span><h3>We Build Your AI System</h3><p>We configure and deploy an automated lead-finding system specifically around your requirements.</p></div>
+        <div class="step reveal d2"><span class="step-num">03</span><h3>Let It Find Leads</h3><p>Your AI agent continuously searches for prospects that match your criteria and organizes them into usable leads.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow reveal">What You Get</div>
+        <h2 class="t-heading-lg reveal d1">Everything needed to run on its own.</h2>
+        <p class="t-body reveal d2">One setup fee. One simple monthly cost. No agency retainer, no complicated onboarding.</p>
+      </div>
+      <div class="feature-grid reveal">
+        <div class="feature-item"><span class="idx">01</span><h3>Custom AI Agent</h3><p>Built around your business and target market — not a one-size-fits-all script.</p></div>
+        <div class="feature-item"><span class="idx">02</span><h3>Automated Lead Discovery</h3><p>The system continuously searches for prospects that match your target profile.</p></div>
+        <div class="feature-item"><span class="idx">03</span><h3>Lead Qualification</h3><p>Filters prospects according to the criteria you provide, so you see what matters.</p></div>
+        <div class="feature-item"><span class="idx">04</span><h3>Organized Leads</h3><p>Discovered prospects are kept organized and easy to work with — no messy spreadsheets.</p></div>
+        <div class="feature-item"><span class="idx">05</span><h3>Ongoing Operation</h3><p>The ~$80/month covers the software, AI agent operation, and ongoing maintenance.</p></div>
+        <div class="feature-item"><span class="idx">06</span><h3>3 Months Bug Fixing</h3><p>If the system doesn't work as intended because of a bug, we investigate and fix it at no extra charge.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section" id="pricing">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow reveal">Pricing</div>
+        <h2 class="t-heading-lg reveal d1">One setup. Your own automated lead-finding system.</h2>
+        <p class="t-body reveal d2">Simple, transparent pricing — no long-term contract and no large agency retainer.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="reveal">
+          <div class="price-line"><span class="amt">$300</span><span class="per">one-time</span></div>
+          <p class="price-desc">Setup fee — covers building your custom AI lead system</p>
+          <div class="price-line"><span class="amt">~$80</span><span class="per">/ month</span></div>
+          <p class="price-desc">Software, AI agent operation &amp; ongoing maintenance</p>
+
+          <ul class="price-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Custom AI lead-finding system built around your niche</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Automated, ongoing lead searching</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Lead qualification based on your criteria</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Leads organized for easy use</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Ongoing AI/software operation</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>3 months of bug fixing included</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>No large agency retainer, no complicated setup</li>
+          </ul>
+          <div class="cta-row" style="margin-top:32px;">
+            <a href="#faq" class="btn">Get Started — $300</a>
+            <p class="price-note">Actual lead volume varies by niche, location &amp; market.</p>
+          </div>
+        </div>
+
+        <div class="reveal d1">
+          <div class="compare-card">
+            <div class="compare-grid">
+              <div class="compare-col them">
+                <h4>Traditional Agency</h4>
+                <ul><li>Ongoing monthly retainer</li><li>Long-term contracts</li><li>Often relies on manual prospecting</li><li>Less visibility &amp; control</li><li>Can get expensive at scale</li></ul>
+              </div>
+              <div class="compare-col us">
+                <h4>Leads4U</h4>
+                <ul><li>$300 one-time setup</li><li>~$80/month to operate</li><li>Automated lead discovery</li><li>Built around your specific niche</li><li>You control &amp; own your leads</li></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUG FIX GUARANTEE -->
+  <section class="section">
+    <div class="container">
+      <div class="guarantee reveal">
+        <div class="badge-seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div>
+          <h3 class="t-heading">3 Months of Bug Fixing Included.</h3>
+          <p>Every Leads4U setup includes 3 months of bug fixing. If your system isn't working as intended because of a technical issue or bug, we'll investigate the problem and fix it at no additional charge.</p>
+          <p class="fine">This covers bugs and technical issues with the system — not unlimited customization, new features, changes to your original strategy, or outages caused by third-party services.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO BANNER (second video moment) -->
+  <section class="section" style="padding-bottom:0;">
+    <div class="container">
+      <div class="video-banner reveal" id="videoBanner">
+        <img src="assets/img/handshake.jpg" alt="Business professionals shaking hands" />
+        <div class="video-banner-copy">
+          <div class="eyebrow">Every Deployment, In Practice</div>
+          <h2>What a good customer looks like — that's your call, not ours.</h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section class="section" id="who-its-for">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow reveal">Who It's For</div>
+        <h2 class="t-heading-lg reveal d1">Built for businesses that live and die by new customers.</h2>
+        <p class="t-body reveal d2">If your business depends on finding new customers, Leads4U can be configured around your niche.</p>
+      </div>
+      <div class="industry-grid reveal">
+        <div class="industry-tile"><img src="assets/img/roofer.jpg" alt="Roofer" /><span>Roofers</span></div>
+        <div class="industry-tile"><img src="assets/img/plumber.jpg" alt="Plumber" /><span>Plumbers</span></div>
+        <div class="industry-tile"><img src="assets/img/electrician.jpg" alt="Electrician" /><span>Electricians</span></div>
+        <div class="industry-tile"><img src="assets/img/realtor.jpg" alt="Realtor" /><span>Realtors</span></div>
+        <div class="industry-tile"><img src="assets/img/insurance.jpg" alt="Insurance agent" /><span>Insurance Agents</span></div>
+        <div class="industry-tile"><img src="assets/img/marketing.jpg" alt="Marketing agency team" /><span>Marketing Agencies</span></div>
+        <div class="industry-tile"><img src="assets/img/cleaning.jpg" alt="Cleaning company" /><span>Cleaning Companies</span></div>
+        <div class="industry-tile"><img src="assets/img/landscaper.jpg" alt="Landscaper" /><span>Landscapers</span></div>
+        <div class="industry-tile"><img src="assets/img/accountant.jpg" alt="Accountant" /><span>Accountants</span></div>
+        <div class="industry-tile"><img src="assets/img/consultant.jpg" alt="Consultant" /><span>Consultants</span></div>
+        <div class="industry-tile"><img src="assets/img/b2b.jpg" alt="B2B services" /><span>B2B Services</span></div>
+        <div class="industry-tile"><img src="assets/img/contractor.jpg" alt="Contractor" /><span>Contractors</span></div>
+      </div>
+      <p class="who-footer reveal">Don't see your industry? <strong>If you sell to businesses or homeowners, we can likely configure a system for you.</strong></p>
+    </div>
+  </section>
+
+  <!-- LEAD DASHBOARD DEMO -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow reveal">Interface Preview</div>
+        <h2 class="t-heading-lg reveal d1">What your leads look like.</h2>
+        <p class="t-body reveal d2">A sample of how discovered prospects are organized. This is a demonstration of the interface — not a database of real Leads4U customers.</p>
+      </div>
+      <div class="reveal">
+        <div class="demo-head">
+          <h4>Sample Lead Dashboard</h4>
+          <div class="filters" id="leadFilters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="high">High Priority</button>
+            <button class="filter-btn" data-filter="med">Medium</button>
+            <button class="filter-btn" data-filter="low">Low</button>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table class="leads" id="leadsTable">
+            <thead><tr><th>Company</th><th>Contact</th><th>Industry</th><th>Location</th><th>Website</th><th>Lead Score</th><th>Qualification</th></tr></thead>
+            <tbody id="leadsTbody"></tbody>
+          </table>
+        </div>
+        <div class="demo-foot">Sample data for illustration only. Actual leads are generated based on your own configured criteria.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow reveal">FAQ</div>
+        <h2 class="t-heading-lg reveal d1">Common questions.</h2>
+        <p class="t-body reveal d2">Straightforward answers — no fine print surprises.</p>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item"><button class="faq-q">How does Leads4U work? <span class="plus"></span></button><div class="faq-a"><div class="faq-a-inner">We configure an AI-powered system around your niche and target customer criteria. It continuously searches for potential prospects and organizes qualifying leads for you to review.</div></div></div>
+        <div class="faq-item"><button class="faq-q">Is the $300 a monthly fee? <span class="plus"></span></button><div class="faq-a"><div class="faq-a-inner">No. The $300 is a one-time setup fee to build and configure your AI lead system.</div></div></div>
+        <div class="faq-item"><button class="faq-q">What is the ~$80/month for? <span class="plus"></span></button><div class="faq-a"><div class="faq-a-inner">It covers the software, AI agent operation, and ongoing maintenance required to keep the system running.</div></div></div>
+        <div class="faq-item"><button class="faq-q">How many leads will I get? <span class="plus"></span></button><div class="faq-a"><div class="faq-a-inner">The system is designed to find approximately 100 leads per month, but actual lead volume varies based on your industry, location, criteria, and available prospects. This is not a guaranteed number.</div></div></div>
+        <div class="faq-item"><button class="faq-q">Do you guarantee customers or sales? <span class="plus"></span></button><div class="faq-a"><div class="faq-a-inner">No. Leads4U provides lead-generation technology. We do not guarantee that leads will become customers or generate revenue.</div></div></div>
+        <div class="faq-item"><button class="faq-q">What happens if something breaks? <span class="plus"></span></button><div class="faq-a"><div class="faq-a-inner">Every setup includes 3 months of bug fixing. If the system doesn't work as intended because of a bug or technical issue, we'll investigate and fix it at no additional charge.</div></div></div>
+        <div class="faq-item"><button class="faq-q">Can I choose what types of leads I receive? <span class="plus"></span></button><div class="faq-a"><div class="faq-a-inner">Yes. The system is configured around your target customer, niche, location, and qualification criteria.</div></div></div>
+        <div class="faq-item"><button class="faq-q">Do I need technical knowledge? <span class="plus"></span></button><div class="faq-a"><div class="faq-a-inner">No. Leads4U handles the technical setup from start to finish.</div></div></div>
+        <div class="faq-item"><button class="faq-q">Can I request changes later? <span class="plus"></span></button><div class="faq-a"><div class="faq-a-inner">Yes — but it's worth distinguishing between the two. Bug fixes during the first 3 months are included at no extra charge. New features, customizations, or changes to your original scope are treated separately and may cost extra.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="section">
+    <div class="container">
+      <div class="final-cta reveal">
+        <div class="photo-bg"><img src="assets/img/street.jpg" alt="" role="presentation" /></div>
+        <h2 class="t-heading-lg">Stop Searching. <em>Start Finding.</em></h2>
+        <p>Tell us who your ideal customer is. We'll build the system that finds them.</p>
+        <div class="cta-row"><a href="mailto:hello@leads4u.com?subject=Get%20My%20AI%20Lead%20System" class="btn">Get Your AI Lead System — $300</a></div>
+        <p class="price-note">One-time setup. Approximately $80/month to operate.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="logo">Leads<span class="four">4U</span></a>
+        <p>AI-powered lead-generation systems for businesses and service professionals.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col"><h5>Site</h5><ul><li><a href="#how-it-works">How It Works</a></li><li><a href="#features">Features</a></li><li><a href="#who-its-for">Who It's For</a></li></ul></div>
+        <div class="footer-col"><h5>Get Started</h5><ul><li><a href="#pricing">Pricing</a></li><li><a href="#faq">FAQ</a></li><li><a href="mailto:hello@leads4u.com">Contact</a></li></ul></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>© <span id="year"></span> Leads4U. All rights reserved.</p><p>leads4u.com</p></div>
+    <p class="footer-disclaimer">*Illustrative figure, not a guarantee. Leads4U provides lead-generation software and AI agent configuration services. Lead volume is designed to target approximately 100 prospects per month but varies based on industry, location, target audience, lead criteria, market size, and available data — it is not guaranteed. Leads4U does not guarantee customers, sales, revenue, or return on investment. The 3-month bug-fixing period covers technical issues with the delivered system and does not include new features, customizations, changes to original scope, or issues caused by third-party services.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  var header = document.getElementById('siteHeader');
+  function onScroll(){ header.classList.toggle('scrolled', window.scrollY > 24); }
+  document.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  var navToggle = document.getElementById('navToggle');
+  var mobileMenu = document.getElementById('mobileMenu');
+  navToggle.addEventListener('click', function(){
+    var open = mobileMenu.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      mobileMenu.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  var revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window && !reduceMotion){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){ if(entry.isIntersecting){ entry.target.classList.add('in'); io.unobserve(entry.target); } });
+    }, { threshold:0.12, rootMargin:'0px 0px -60px 0px' });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else { revealEls.forEach(function(el){ el.classList.add('in'); }); }
+
+  if(!reduceMotion){
+    var banner = document.getElementById('videoBanner');
+    function onParallax(){
+      if(!banner) return;
+      var r = banner.getBoundingClientRect();
+      var vh = window.innerHeight;
+      if(r.bottom > 0 && r.top < vh){
+        var progress = (vh - r.top) / (vh + r.height);
+        var shift = (progress - 0.5) * 20;
+        var img = banner.querySelector('img');
+        if(img) img.style.transform = 'translateY(' + shift.toFixed(1) + 'px)';
+      }
+    }
+    document.addEventListener('scroll', onParallax, { passive:true });
+    onParallax();
+  }
+
+  var badgeNum = document.getElementById('heroBadgeNum');
+  if(badgeNum && 'IntersectionObserver' in window){
+    var badgeIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          if(reduceMotion){ badgeNum.textContent = 127; badgeIo.unobserve(entry.target); return; }
+          var start=null, dur=1000;
+          function step(ts){ if(!start) start=ts; var p=Math.min((ts-start)/dur,1); var e=1-Math.pow(1-p,3); badgeNum.textContent=Math.round(127*e); if(p<1) requestAnimationFrame(step); }
+          requestAnimationFrame(step);
+          badgeIo.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.6 });
+    badgeIo.observe(badgeNum);
+  }
+
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var btn = item.querySelector('.faq-q');
+    var answer = item.querySelector('.faq-a');
+    btn.setAttribute('aria-expanded','false');
+    btn.addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(other){
+        if(other !== item){ other.classList.remove('open'); other.querySelector('.faq-a').style.maxHeight=null; other.querySelector('.faq-q').setAttribute('aria-expanded','false'); }
+      });
+      if(isOpen){ item.classList.remove('open'); answer.style.maxHeight=null; btn.setAttribute('aria-expanded','false'); }
+      else{ item.classList.add('open'); answer.style.maxHeight = answer.scrollHeight + 'px'; btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+
+  var leadData = [
+    { company:'Summit Roofing Co.', contact:'M. Alvarez', industry:'Roofing', loc:'Toronto, ON', site:'summitroofing.example', score:92, qual:'high' },
+    { company:'Vantage Property Group', contact:'J. Nguyen', industry:'Property Mgmt', loc:'Vancouver, BC', site:'vantagepg.example', score:88, qual:'high' },
+    { company:'Blue Oak Dental', contact:'Dr. R. Kim', industry:'Dental', loc:'Austin, TX', site:'blueoakdental.example', score:81, qual:'high' },
+    { company:'Northside Restaurant Group', contact:'T. Brooks', industry:'Hospitality', loc:'Chicago, IL', site:'northsiderg.example', score:74, qual:'med' },
+    { company:'GreenScape Landscaping', contact:'C. Osei', industry:'Landscaping', loc:'Denver, CO', site:'greenscapeco.example', score:69, qual:'med' },
+    { company:'Apex HVAC Solutions', contact:'D. Farrell', industry:'HVAC', loc:'Phoenix, AZ', site:'apexhvac.example', score:65, qual:'med' },
+    { company:'Coastal Insurance Partners', contact:'L. Moreno', industry:'Insurance', loc:'Tampa, FL', site:'coastalinspartners.example', score:58, qual:'med' },
+    { company:'Bright Path Consulting', contact:'S. Patel', industry:'Consulting', loc:'Seattle, WA', site:'brightpathco.example', score:41, qual:'low' },
+    { company:'Ledger & Lane Accounting', contact:'W. Chen', industry:'Accounting', loc:'Columbus, OH', site:'ledgerlane.example', score:37, qual:'low' }
+  ];
+  var qualColors = { high:'#2c4638', med:'#8c8271', low:'#c9bfa6' };
+  function renderLeads(filter){
+    var tbody = document.getElementById('leadsTbody');
+    tbody.innerHTML = '';
+    leadData.filter(function(l){ return filter==='all' || l.qual===filter; }).forEach(function(l){
+      var qualLabel = l.qual==='high' ? 'High Priority' : (l.qual==='med' ? 'Medium' : 'Low');
+      var tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td><div class="co-cell"><span class="dot" style="background:'+qualColors[l.qual]+'"></span><span class="co-name">'+l.company+'</span></div></td>'+
+        '<td>'+l.contact+'</td><td>'+l.industry+'</td><td>'+l.loc+'</td>'+
+        '<td><span class="site-link">'+l.site+'</span></td>'+
+        '<td><div class="score-bar"><div class="score-track"><div class="score-fill" style="width:'+l.score+'%"></div></div><span>'+l.score+'</span></div></td>'+
+        '<td><span class="qual-badge '+l.qual+'">'+qualLabel+'</span></td>';
+      tbody.appendChild(tr);
+    });
+  }
+  renderLeads('all');
+  document.querySelectorAll('#leadFilters .filter-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('#leadFilters .filter-btn').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderLeads(btn.getAttribute('data-filter'));
+    });
+  });
+})();
+</script>
+</body>
+</html>
